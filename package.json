@@ -4,5 +4,8 @@
     "jest": "^27.5.1",
     "nodemon": "^2.0.15"
     
-  }
+  },
+  "scripts": {
+    "test": "jest"
+  },
 }

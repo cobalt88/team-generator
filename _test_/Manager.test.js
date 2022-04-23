@@ -1,21 +1,15 @@
 
-// importing Employee constructor 
-const Employee = require('./Employee');
 
-// manager constructor extends employee constructor 
-class Manager extends Employee {
-    constructor (name, id, email, officeNumber) {
-        // calling employee constructor
-        super (name, id, email); 
-        
-        this.officeNumber = officeNumber; 
-    }
+const Manager = require('../lib/Manager');
 
-    // override employee role to manager 
-    getRole () {
-        return "Manager";
-    }
-}
+test('creates an Manager object', () => {
+    const manager = new Manager('Nicole', 90, 'nicole.elisaw@gmail', 4);
+    
+    expect(manager.officeNumber).toEqual(expect.any(Number));
+});
 
-// to be exported 
-module.exports = Manager; 
+test('gets role of employee', () => {
+    const manager = new Manager('Nicole', 90, 'nicole.elisaw@gmail.com');
+
+    expect(manager.getRole()).toEqual("Manager");
+}); 

@@ -1,25 +1,20 @@
-// importing Employee constructor 
-const Employee = require("./Employee");
 
-// engineer constructor extends employee constructor 
-class Engineer extends Employee {
-    constructor (name, id, email, github) {
-        // calling employee constructor 
-        super (name, id, email);
+const Engineer = require('../lib/Engineer');
 
-        this.github = github; 
-    }
+test('creates an Engineer object', () => {
+    const engineer = new Engineer('Nicole', 90, 'nicole.elisaw@gmail', 'nicolewallace09');
+    
+    expect(engineer.github) .toEqual(expect.any(String));
+});
 
-    // returning github from input 
-    getGithub () {
-        return this.github;
-    }
+test('gets engineer github value', () => {
+    const engineer = new Engineer('Nicole', 90, 'nicole.elisaw@gmail', 'nicolewallace09');
 
-     // override employee role to engineer
-    getRole () {
-        return "Engineer";
-    }
-}
+    expect(engineer.getGithub()).toEqual(expect.stringContaining(engineer.github.toString()));
+});
 
-// to be exported 
-module.exports = Engineer; 
+test('gets role of employee', () => {
+    const engineer = new Engineer('Nicole', 90, 'nicole.elisaw@gmail', 'nicolewallace09');
+
+    expect(engineer.getRole()).toEqual("Engineer");
+});
