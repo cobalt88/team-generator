@@ -1,3 +1,5 @@
+//generates html cards, then merges those cards into an oject array, that array is then injected into the final html template as a string to be output to a separate HTML file
+
 const generateManager = (manager) => 
 {`
   <div class="col-4 mt-4">
@@ -100,7 +102,7 @@ const generateTeamPage = (employeeCards) => {
     <main>
         <div class="container">
             <div class="row justify-content-center" id="team-cards">
-                <!--Team Cards-->
+                <!--Cards go here-->
                 ${employeeCards}
             </div>
         </div>

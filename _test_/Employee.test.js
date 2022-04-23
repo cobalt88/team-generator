@@ -1,3 +1,5 @@
+//standard employee test needs to check for name, id, and email. 
+
 const Employee = require('../lib/Employee');
 
 test('is employee', () => {
