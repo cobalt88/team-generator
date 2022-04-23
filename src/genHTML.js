@@ -55,7 +55,7 @@ const generateIntern = (intern) => {
 };
 
 const generateHTML = (data) => {
-  pageArr = [];
+  const pageArr = [];
 
   for (let i = 0; i < data.length; i++) {
     let employee = data[i]
