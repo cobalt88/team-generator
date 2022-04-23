@@ -10,6 +10,19 @@ const genHTML = require('./src/genHTML.js');
 
 // inquirer prompts for Manager: name, id#, email, office# - add validation for each input. 
 
+const addManager = () => {
+  return inquirer.prompt ([
+    {
+      name: 'name',
+      message: 'What is the name of the Team Manager?',
+      type: 'input',
+      // validate: 
+    }
+  ]);
+
+  
+}
+
 //inquirer prompts for Engineer: name, id#, email, github username - add validation for each input.
 
 //inquirer prompts for Intern: name, id#, email, school name - add validation for each input.
