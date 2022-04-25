@@ -9,12 +9,10 @@ const Intern = require('./lib/Intern.js');
 const genHTML = require('./src/genHTML.js');
 
 const output = [];
-const teams = [];
 
 // inquirer prompts for Manager: name, id#, email, office# -. 
 
-const addManager = () => {
-  inquirer.prompt([
+const managerQuestions = [
     {
       name: 'name',
       message: 'What is the name of the Team Manager?',
@@ -41,18 +39,11 @@ const addManager = () => {
       message: 'Would you like to add another employee?',
       type: 'confirm'
     }
-  ])
-  .then((answers) => {
-    if(answers.addAnother){
-      addEmployee();
-    }
-  })
-}
-
+  ];
 
 //inquirer prompts for Engineer: name, id#, email, github username -
 
-const addEngineer = [
+const engineerQuestions = [
     {
       name: 'name',
       message: "What is the Engineer's Name?",
@@ -83,7 +74,7 @@ const addEngineer = [
 
 //inquirer prompts for Intern: name, id#, email, school name - 
 
-const intern = [
+const internQuestions = [
     {
       name: 'name',
       message: "What is the Intern's Name?",
@@ -91,7 +82,7 @@ const intern = [
     },
     {
       name: 'id',
-      message: "What is the Inter's ID Number?",
+      message: "What is the Intern's ID Number?",
       type: 'input'
     },
     {
@@ -111,23 +102,73 @@ const intern = [
     }
   ];
 
-
-const welcome = [
-    {
-      name: 'welcome',
-      message: 'Welcome to Team Generator! Would you like to start a new team or add an employee to an existing team?',
-      type: 'list',
-      options: ['Start a new team', 'Add to an existing team']
-      
-    }
-  ];
-
-
 const addEmployee = [
     {
       name: 'addEmployee',
       message: "Would you like to add a Manager, Engineer, or Intern.",
       type: 'list',
-      options: ['Manager', 'Engineer', 'Intern']
+      choices: ['Manager', 'Engineer', 'Intern']
     }
   ];
+
+const welcomePrompt = async () => {
+  welcome = await inquirer.prompt([
+    {
+      name: 'welcome',
+      message: 'Welcome to Team Generator! A simple easy way to keep track of your team members. Whenever you are ready to input your team members information select yes to continue,',
+      type: 'confirm',
+    }
+  ])
+  if(welcome){
+    prompts();
+  }
+}
+
+const complete = () => console.log(`you have reached the complete function, and here is the current output array${output}`); console.log(output);
+
+const prompts = async () => {
+
+  let employeeObj = {};
+
+  const employee = await inquirer.prompt(addEmployee);
+
+    switch(employee.addEmployee){
+
+      case 'Manager':
+        employeeObj = await inquirer.prompt(managerQuestions);
+        output.push(employeeObj);
+        if(employeeObj.addAnother){
+          prompts();
+        } else {
+          complete();
+        }
+        break;
+      
+      case 'Engineer':
+        employeeObj = await inquirer.prompt(engineerQuestions);
+        output.push(employeeObj);
+        if(employeeObj.addAnother){
+          prompts();
+        } else {
+          complete();
+        }
+        break;
+        
+      case 'Intern':
+        employeeObj = await inquirer.prompt(internQuestions);
+        output.push(employeeObj);
+        if(employeeObj.addAnother){
+          prompts();
+        } else {
+          complete();
+        }
+        break;
+
+      default:
+        console.log('you have reached the default switch statement. thant should not happen. Please try again!');
+      }
+  }
+    
+  
+
+  welcomePrompt();
