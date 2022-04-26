@@ -38,20 +38,23 @@ const addEmployee = [
 ];
 
 //placeholder function to test current function outputs. 
-const complete = () => console.log(`you have reached the complete function, and here is the current output array${output}`); console.log(output);
+const complete = () => console.log(output);
 
 //function to display the various questions fir each type of employee
 const prompts = async () => {
 
-  let employeeObj = {};
+
 
   const employee = await inquirer.prompt(addEmployee);
 
     switch(employee.addEmployee){
 
       case 'Manager':
-        employeeObj = await managerQuestions();
-        const manager = new Manager(employeeObj)
+       let employeeObj = await managerQuestions();
+       console.log(employeeObj)
+      const manager = new Manager(employeeObj);
+        output.push(manager);
+
         if(employeeObj.addAnother){
           prompts();
         } else {
@@ -60,8 +63,8 @@ const prompts = async () => {
         break;
     
       case 'Engineer':
-        employeeObj = await engineerQuestions();
-        output.push(employeeObj);
+       employeeObj = await engineerQuestions();
+        const engineer = new Engineer(employeeObj)
         if(employeeObj.addAnother){
           prompts();
         } else {
@@ -71,7 +74,7 @@ const prompts = async () => {
         
       case 'Intern':
         employeeObj = await internQuestions();
-        output.push(employeeObj);
+        const intern = new Intern(employeeObj)
         if(employeeObj.addAnother){
           prompts();
         } else {
