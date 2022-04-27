@@ -44,19 +44,19 @@ const complete = () => console.log(output);
 const prompts = async () => {
 
 
-
+  let employeeObj = {};
   const employee = await inquirer.prompt(addEmployee);
 
     switch(employee.addEmployee){
 
       case 'Manager':
-       let employeeObj = await managerQuestions();
+       employeeObj = await managerQuestions();
        console.log(employeeObj)
       const manager = new Manager(employeeObj);
         output.push(manager);
 
         if(employeeObj.addAnother){
-          prompts();
+          return prompts();
         } else {
           complete();
         }
@@ -65,8 +65,9 @@ const prompts = async () => {
       case 'Engineer':
        employeeObj = await engineerQuestions();
         const engineer = new Engineer(employeeObj)
+        output.push(engineer)
         if(employeeObj.addAnother){
-          prompts();
+          return prompts();
         } else {
           complete();
         }
@@ -75,8 +76,9 @@ const prompts = async () => {
       case 'Intern':
         employeeObj = await internQuestions();
         const intern = new Intern(employeeObj)
+        output.push(intern)
         if(employeeObj.addAnother){
-          prompts();
+          return prompts();
         } else {
           complete();
         }
