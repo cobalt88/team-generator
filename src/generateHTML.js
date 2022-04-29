@@ -54,33 +54,37 @@ const generateIntern = (intern) => {
   `
 };
 
-const pageArr = [];
+;
 
-const generateHTML = (data) => {
-  
+const generateCards = (data) => {
+  console.log('made it into the generate cards function');
+const pageArr = [];
 
   for (let i = 0; i < data.length; i++) {
     let employee = data[i]
-    let role = employee.getRole();
+    let role = employee.roll;
+    switch(role){
+      case 'Manager':
+        let managerCard = generateManager(employee);
+        pageArr.push(managerCard);
+          break;
 
-    if(role === 'Manager'){
-      let managerCard = generateManager(employee);
-      pageArr.push(managerCard);
-    }
+      case 'Engineer':
+        let engineerCard = generateEngineer(employee);
+        pageArr.push(engineerCard);
+          break;
 
-    if(role === 'Engineer'){
-      let engineerCard = generateEngineer(employee);
-      pageArr.push(engineerCard);
-    }
-
-    if(role === 'Intern'){
-      let internCard = generateIntern(employee);
-      pageArr.push(internCard);
+      case 'Intern':
+        let internCard = generateIntern(employee);
+        pageArr.push(internCard);
+          break;
     }
   }
+  console.log(`made it to the end of generate cards, ${pageArr}`);
+  
 }
 
-const employeeCards = pageArr.join('');
+const employeeCards = () => pageArr.join('');
 const generateTeamPage = (employeeCards) => {
   `
   <!DOCTYPE html>
@@ -116,6 +120,14 @@ const generateTeamPage = (employeeCards) => {
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </html>
   `
+}
+
+const generateHTML = async (employees) => {
+  let data = employees
+  console.log(data);
+  result = generateCards(data);
+  console.log(result);
+
 }
 
 module.exports = generateHTML;
