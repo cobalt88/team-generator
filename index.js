@@ -1,11 +1,10 @@
 //Dependencies for index.js
 const inquirer = require('inquirer');
-const fs = require('fs');
 const Employee = require('./lib/Employee.js');
 const Manager = require('./lib/Manager.js');
 const Engineer = require('./lib/Engineer.js');
 const Intern = require('./lib/Intern.js');
-const genHTML = require('./src/genHTML.js');
+const generateHTML = require('./src/generateHTML.js');
 const managerQuestions = require('./lib/managerQuestions');
 const engineerQuestions = require('./lib/engineerQuestions');
 const internQuestions = require('./lib/internQuestions')
@@ -38,12 +37,10 @@ const addEmployee = [
 ];
 
 //placeholder function to test current function outputs. 
-const complete = () => console.log(output);
+const complete = () => generateHTML(output);
 
-//function to display the various questions fir each type of employee
+//function to display the various questions for each type of employee
 const prompts = async () => {
-
-
   let employeeObj = {};
   const employee = await inquirer.prompt(addEmployee);
 
@@ -51,17 +48,15 @@ const prompts = async () => {
 
       case 'Manager':
        employeeObj = await managerQuestions();
-       console.log(employeeObj)
       const manager = new Manager(employeeObj);
         output.push(manager);
-
         if(employeeObj.addAnother){
           return prompts();
         } else {
           complete();
         }
         break;
-    
+
       case 'Engineer':
        employeeObj = await engineerQuestions();
         const engineer = new Engineer(employeeObj)
@@ -72,7 +67,7 @@ const prompts = async () => {
           complete();
         }
         break;
-        
+
       case 'Intern':
         employeeObj = await internQuestions();
         const intern = new Intern(employeeObj)
