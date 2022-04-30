@@ -3,13 +3,28 @@
     "inquirer": "^8.2.2",
     "nodemon": "^2.0.15"
   },
-
   "devDependencies": {
     "jest": "^27.5.1"
   },
   "scripts": {
     "test": "jest"
-  }
-
-
+  },
+  "name": "team-generator",
+  "description": "module 10 team profile generator project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cobalt88/team-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cobalt88/team-generator/"
+  },
+  "homepage": "https://github.com/cobalt88/team-generator#readme"
 }
