@@ -31,7 +31,7 @@
  It's pretty straight forward. Just follow the prompts after launching the application.
  once you have made your way through all the prompts an HTML file will be generated in the dist folder, ./dist/team.html
 
- ![Alt Text](./dist/teamGeneratorGif.gif)
+ [![Watch the video](./dist/team%20generator%20walkthrough.webm)](./dist/team%20generator%20walkthrough.webm)
 
  
 
