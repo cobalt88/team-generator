@@ -22,7 +22,14 @@ const welcomePrompt = async () => {
     }
   ])
   if(welcome){
-    prompts();
+    employeeObj = await managerQuestions();
+    const manager = new Manager(employeeObj);
+    output.push(manager);
+      if(employeeObj.addAnother){
+        return prompts();
+      } else {
+        complete();
+      };
   }
 }
 
@@ -32,9 +39,11 @@ const addEmployee = [
     name: 'addEmployee',
     message: "Would you like to add a Manager, Engineer, or Intern.",
     type: 'list',
-    choices: ['Manager', 'Engineer', 'Intern']
+    choices: ['Engineer', 'Intern']
   }
 ];
+
+
 
 //placeholder function to test current function outputs. 
 const complete = () => generateHTML(output);
@@ -44,18 +53,9 @@ const prompts = async () => {
   let employeeObj = {};
   const employee = await inquirer.prompt(addEmployee);
 
-    switch(employee.addEmployee){
+  
 
-      case 'Manager':
-       employeeObj = await managerQuestions();
-      const manager = new Manager(employeeObj);
-        output.push(manager);
-        if(employeeObj.addAnother){
-          return prompts();
-        } else {
-          complete();
-        }
-        break;
+    switch(employee.addEmployee){
 
       case 'Engineer':
        employeeObj = await engineerQuestions();
